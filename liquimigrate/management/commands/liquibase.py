@@ -1,4 +1,5 @@
 import distutils
+import distutils.version
 import django
 import os
 
