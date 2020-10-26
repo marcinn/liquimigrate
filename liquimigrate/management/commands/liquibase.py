@@ -7,7 +7,11 @@ from django.conf import settings
 from django.core.management.base import BaseCommand, CommandError
 from django.core.management import call_command
 
-from ...settings import LIQUIBASE_JAR, LIQUIBASE_DRIVERS
+from ...settings import (
+    LIQUIBASE_JAR,
+    LIQUIBASE_DRIVERS,
+    LIQUIBASE_DB_DEFAULTS
+)
 from ... import changesets
 
 
@@ -41,20 +45,6 @@ except ImportError:
                 'PASSWORD': settings.DATABASE_PASSWORD,
             },
         }
-
-
-DB_DEFAULTS = {
-    'postgresql': {
-        'tag': 'postgresql',
-        'host': 'localhost',
-        'port': 5432,
-    },
-    'mysql': {
-        'tag': 'mysql',
-        'host': 'localhost',
-        'port': 3306,
-    },
-}
 
 
 class Command(BaseCommand):
@@ -193,7 +183,7 @@ class Command(BaseCommand):
 
 def _get_url_for_db(tag, dbsettings):
     pattern = "jdbc:%(tag)s://%(host)s:%(port)s/%(name)s"
-    options = dict(DB_DEFAULTS.get(tag))
+    options = dict(LIQUIBASE_DB_DEFAULTS.get(tag))
     settings_map = {
         'NAME': 'name',
         'HOST': 'host',
