@@ -1,4 +1,3 @@
-import distutils
 import django
 import os
 
@@ -20,8 +19,7 @@ except ImportError:
     emit_post_migrate_signal = None
 
 
-django_19_or_newer = (
-        distutils.version.StrictVersion(django.__version__) >= '1.9')
+django_19_or_newer = django.VERSION >= (1, 9)
 
 try:
     from django.db import connections

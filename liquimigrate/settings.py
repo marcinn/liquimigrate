@@ -6,6 +6,9 @@ LIQUIBASE_JAR = getattr(settings, 'LIQUIBASE_JAR',
     os.path.join(os.path.dirname(__file__), 'vendor', 'liquibase.jar'))
 
 LIQUIBASE_DRIVERS = {
+    'postgresql': ('postgresql', 'org.postgresql.Driver',
+        os.path.join(os.path.dirname(__file__), 'vendor', 'connectors',
+            'postgresql-jdbc3-8.2.jar')),
     'postgresql_psycopg2': ('postgresql', 'org.postgresql.Driver',
         os.path.join(os.path.dirname(__file__), 'vendor', 'connectors',
             'postgresql-jdbc3-8.2.jar')),

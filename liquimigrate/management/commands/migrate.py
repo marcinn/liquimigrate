@@ -14,7 +14,7 @@ if MigrateCommand:
 
         def handle(self, *args, **options):
             if options.get("interactive"):
-                confirm = raw_input("""
+                confirm = input("""
 You have requested a database migration using standard Django 1.7+ mechanism.
 This CONFLICTS WITH LIQUIMIGRATE.
 Are you sure you want to do this?
@@ -26,7 +26,7 @@ Type 'yes' to continue, or 'no' to cancel: """)
             if confirm == "yes":
                 super(Command, self).handle(**options)
             else:
-                print "Migrate cancelled."
+                print("Migrate cancelled.")
 else:
     class Command(BaseCommand):
         def handle(self, *args, **kwargs):
